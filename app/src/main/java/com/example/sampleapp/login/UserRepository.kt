@@ -10,7 +10,7 @@ class UserRepository @Inject constructor() {
     }
 
     suspend fun login(username: String, password: String): Boolean {
-        if (username == "user" && password == "password") {
+        if (username.isNotEmpty() && password.isNotEmpty()) {
             isLoggedIn = true
             return true
         }
