@@ -132,30 +132,7 @@ fun HomeScreen(navController: NavController, viewModel: PaymentViewModel = hiltV
                 if (transactions.isNotEmpty()) {
                     items(transactions.size) { index ->
                         val transaction = transactions[index]
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                                .background(
-                                    if (transaction.type == TransactionType.ADD) Color(0xFFE6F9EA) else Color(0xFFFDE6E6),
-                                    shape = RoundedCornerShape(12.dp)
-                                )
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = transaction.date,
-                                fontSize = 14.sp,
-                                color = Color.Gray
-                            )
-                            Text(
-                                text = "${if (transaction.type == TransactionType.ADD) "+" else "-"}₹${transaction.amount}",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (transaction.type == TransactionType.ADD) Color(0xFF28A745) else Color(0xFFFF4D4D)
-                            )
-                        }
+                        TransactionItem(transaction)
                     }
                 } else {
                     item {

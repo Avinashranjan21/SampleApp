@@ -1,13 +1,19 @@
 package com.example.sampleapp.transaction
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -16,6 +22,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sampleapp.home.PaymentViewModel
+import com.example.sampleapp.home.Transaction
+import com.example.sampleapp.home.TransactionItem
 import com.example.sampleapp.home.TransactionType
 
 @Composable
@@ -42,12 +50,7 @@ fun TransactionHistoryScreen(navController: NavController) {
             LazyColumn {
                 items(transactions.size) { index ->
                     val transaction = transactions[index]
-                    Text(
-                        text = "${transaction.date}: ${if (transaction.type == TransactionType.ADD) "+" else "-"}₹${transaction.amount}",
-                        color = if (transaction.type == TransactionType.ADD) Color.Green else Color.Red,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    )
+                    TransactionItem(transaction)
                 }
             }
         }
