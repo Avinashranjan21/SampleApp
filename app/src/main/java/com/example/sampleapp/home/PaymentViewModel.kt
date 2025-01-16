@@ -12,6 +12,7 @@ class PaymentViewModel @Inject constructor(
 ) : ViewModel() {
 
     val amount: StateFlow<Double> get() = repository.amount
+    val transactions: StateFlow<List<Transaction>> = repository.transactions
 
     private val _showAmountState = MutableStateFlow(true)
     val showAmountState: StateFlow<Boolean> get() = _showAmountState
