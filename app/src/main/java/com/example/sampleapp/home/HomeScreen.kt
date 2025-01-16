@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 fun HomeScreen(navController: NavController) {
     val viewModel: PaymentViewModel = hiltViewModel()
     val amountState = viewModel.amount.collectAsState()
-    val showAmountState = viewModel.showAmount.collectAsState()
+    val showAmountState = viewModel.showAmountState.collectAsState()
 
     val amount = amountState.value
     val showAmount = showAmountState.value
@@ -43,7 +43,7 @@ fun HomeScreen(navController: NavController) {
             )
             Switch(
                 checked = showAmount,
-                onCheckedChange = { viewModel.toggleAmountVisibility() }
+                onCheckedChange = { viewModel.toggleShowAmount() }
             )
         }
 

@@ -7,28 +7,20 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentViewModel @Inject constructor() : ViewModel() {
+class PaymentViewModel @Inject constructor(
+    private val repository: PaymentRepository
+) : ViewModel() {
 
-    private val _amount = MutableStateFlow(0.0)
-    val amount: StateFlow<Double> = _amount
+    val amount: StateFlow<Double> get() = repository.amount
 
-    private val _showAmount = MutableStateFlow(true)
-    val showAmount: StateFlow<Boolean> = _showAmount
+    private val _showAmountState = MutableStateFlow(true)
+    val showAmountState: StateFlow<Boolean> get() = _showAmountState
 
-    fun toggleAmountVisibility() {
-        _showAmount.value = !_showAmount.value
+    fun toggleShowAmount() {
+        _showAmountState.value = !_showAmountState.value
     }
 
-    fun addMoney(amountToAdd: Double) {
-        _amount.value += amountToAdd
-    }
+    fun addAmount(value: Double) = repository.addAmount(value)
 
-    fun makePayment(amountToDeduct: Double): Boolean {
-        return if (_amount.value >= amountToDeduct) {
-            _amount.value -= amountToDeduct
-            true
-        } else {
-            false
-        }
-    }
+    fun subtractAmount(value: Double): Boolean = repository.subtractAmount(value)
 }

@@ -59,7 +59,7 @@ fun MakePaymentScreen(navController: NavController) {
 
         Button(
             onClick = {
-                val success = viewModel.makePayment(amountToPay.toDoubleOrNull() ?: 0.0)
+                val success = viewModel.subtractAmount(amountToPay.toDoubleOrNull() ?: 0.0)
                 if (success) {
                     navController.popBackStack()
                 } else {

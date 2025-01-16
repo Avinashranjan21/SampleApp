@@ -46,7 +46,7 @@ fun AddMoneyScreen(navController: NavController) {
 
         Button(
             onClick = {
-                viewModel.addMoney(amountToAdd.toDoubleOrNull() ?: 0.0)
+                viewModel.addAmount(amountToAdd.toDoubleOrNull() ?: 0.0)
                 navController.popBackStack()
             },
             modifier = Modifier.fillMaxWidth()
